@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for DSA Training</title>
+    <!-- jQuery CDN included -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p {
+            color: red;
+        }
+    </style>
+
+    <h1 style="color:red; text-align: center;">Register For DSA Questions to Advance Training by Code_Kaif Today</h1>
+
+    <form id="contact-form" method="post">
+        <h4>Name:</h4>
+        <input type="text" id="name-input" placeholder="Enter name here…" class="form-control" style="height:35px; text-align: center; width:100%;" /><br />
+
+        <h4>Phone:</h4>
+        <input type="tel" id="phone-input" placeholder="Enter phone number" class="form-control" style="height:35px; text-align: center; width:100%;" /><br />
+
+        <h4>Email:</h4>
+        <input type="email" id="email-input" placeholder="Enter email here…" class="form-control" style="height:35px; text-align: center; width:100%;" /><br />
+
+        <h4>Description:</h4>
+        <input type="text" id="description-input" placeholder="Enter description here…" class="form-control" style="height:35px; text-align: center; width:100%;" /><br />
+
+        <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" style="width:100%;"></div>
+
+        <button type="button" onClick="submitToAPI(event)" class="btn btn-lg" style="margin-top:20px;">Register</button>
+    </form>
+
+    <script>
+        function submitToAPI(e) {
+            e.preventDefault();
+
+            // Validate Name
+            var name = $("#name-input").val();
+            if (!/[A-Za-z]{1}[A-Za-z]/.test(name)) {
+                alert("Name cannot be less than 2 characters.");
+                return;
+            }
+
+            // Validate Phone
+            var phone = $("#phone-input").val();
+            if (!/[0-9]{10}/.test(phone)) {
+                alert("Please enter a valid mobile number.");
+                return;
+            }
+
+            // Validate Email
+            var email = $("#email-input").val();
+            if (email == "") {
+                alert("Please enter your email id.");
+                return;
+            }
+
+            if (!/^([\w-.]+@([\w-]+\.)+[\w-]{2,6})?$/.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Collect Description
+            var desc = $("#description-input").val();
+
+            var data = {
+                name: name,
+                phone: phone,
+                email: email,
+                desc: desc
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "https://yh0x4htuuk.execute-api.ap-south-1.amazonaws.com/dev/contact-us",
+                dataType: "json",
+                crossDomain: true,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+
+                success: function () {
+                    alert("Successfully registered.");
+                    document.getElementById("contact-form").reset();
+                    location.reload();
+                },
+
+                error: function () {
+                    alert("Successfully registered, you will soon get an email with the sheet link!");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
