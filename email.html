@@ -84,23 +84,23 @@
             };
 
             $.ajax({
-                type: "POST",
-                url: "https://yh0x4htuuk.execute-api.ap-south-1.amazonaws.com/dev/contact-us",
-                dataType: "json",
-                crossDomain: true,
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(data),
+    type: "POST",
+    url: "https://rdk4re48m2.execute-api.ap-south-1.amazonaws.com/kaif/contact-us/",
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(data),
 
-                success: function () {
-                    alert("Successfully registered.");
-                    document.getElementById("contact-form").reset();
-                    location.reload();
-                },
+    success: function () {
+        alert("Successfully registered.");
+        document.getElementById("contact-form").reset();
+        location.reload();
+    },
 
-                error: function () {
-                    alert("Successfully registered, you will soon get an email with the sheet link!");
-                }
-            });
+    error: function () {
+        alert("Unsuccessful!");
+    }
+});
+
         }
     </script>
 </body>
